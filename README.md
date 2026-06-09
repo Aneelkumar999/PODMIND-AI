@@ -1,93 +1,507 @@
-# Podmind AI
+# PodMind AI
 
+  PodMind AI is an AI-driven Kubernetes resource discovery and dependency intelligence dashboard. It goes beyond traditional monitoring by collecting pod-level telemetry, analyzing resource behavior with
+  multiple AI agents, identifying root causes, mapping dependencies, and generating actionable recommendations for operators.
 
+  This project was built for the theme:
 
-## Getting started
+  **Beyond monitoring: AI agents for real-time pod resource discovery and dependency mapping**
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+  ---
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+  ## Problem Statement
 
-## Add your files
+  Modern Kubernetes, K3s, MicroK8s, Minikube, and other container orchestration environments can run many pods across multiple namespaces. Operators can access raw metrics, but it is difficult to answer
+  questions such as:
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+  - Which pod is causing CPU or memory spikes?
+  - Are PVC I/O patterns linked to pod restarts?
+  - Which services are influencing each other?
+  - What is the likely root cause of an incident?
+  - Which workloads need optimization first?
 
-```
-cd existing_repo
-git remote add origin https://code.swecha.org/Anil_Kumar_999/podmind-ai.git
-git branch -M main
-git push -uf origin main
-```
+  PodMind AI solves this by combining real-time pod telemetry, dependency inference, AI analysis, root-cause detection, and a rich dashboard.
 
-## Integrate with your tools
+  ---
 
-- [ ] [Set up project integrations](https://code.swecha.org/Anil_Kumar_999/podmind-ai/-/settings/integrations)
+  ## Key Features
 
-## Collaborate with your team
+  - Real-time pod resource discovery
+  - CPU, memory, disk I/O, network, PVC, restart, and namespace telemetry
+  - Multi-agent AI analysis framework
+  - Pod risk scoring
+  - Root cause analysis engine
+  - Incident timeline generation
+  - Dependency graph visualization
+  - PVC-aware topology mapping
+  - Simulation scenarios for reliable demos
+  - AI-generated recommendations
+  - FastAPI backend
+  - React dashboard frontend
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+  ---
 
-## Test and Deploy
+  ## System Architecture
 
-Use the built-in continuous integration in GitLab.
+  ```text
+  Kubernetes / Simulation Metrics
+          |
+          v
+  FastAPI Backend Collector
+          |
+          v
+  Risk Scoring + Multi-Agent Analysis
+          |
+          v
+  Root Cause + Dependency + Timeline Engine
+          |
+          v
+  React Dashboard
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+  ———
 
-***
+  ## Tech Stack
 
-# Editing this README
+  ### Backend
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+  - Python
+  - FastAPI
+  - Kubernetes Python Client
+  - LangGraph
+  - Google Gemini API support
+  - Uvicorn
 
-## Suggestions for a good README
+  ### Frontend
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+  - React
+  - Vite
+  - TypeScript
+  - Tailwind CSS
+  - Recharts
+  - React Flow
+  - Framer Motion
+  - Lucide Icons
+  - Axios
 
-## Name
-Choose a self-explaining name for your project.
+  ———
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+  ## Project Structure
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+  podmind-ai/
+  ├── backend/
+  │   ├── main.py
+  │   ├── k8s_client.py
+  │   ├── agents.py
+  │   └── .env
+  │
+  ├── frontend/
+  │   ├── src/
+  │   │   ├── App.tsx
+  │   │   ├── components/
+  │   │   │   ├── MetricsDashboard.tsx
+  │   │   │   ├── DependencyGraph.tsx
+  │   │   │   └── AIInsights.tsx
+  │   │   └── main.tsx
+  │   ├── package.json
+  │   └── vite.config.ts
+  │
+  ├── simulation/
+  │   └── scenarios.json
+  │
+  └── docs/
+      └── implementation_plan.md
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+  ———
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+  ## Main Modules
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+  ### 1. Backend API
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+  The backend is built with FastAPI and exposes APIs for metrics, scenario control, health checks, and AI analysis.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+  Main file:
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+  backend/main.py
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+  Important endpoints:
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+  GET  /api/v1/health
+  GET  /api/v1/metrics
+  POST /api/v1/scenario
+  POST /api/v1/analyze
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+  ———
 
-## License
-For open source projects, say how it is licensed.
+  ### 2. Kubernetes Metrics Collector
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+  The Kubernetes collector gathers pod and PVC data from a real cluster when available.
+
+  Main file:
+
+  backend/k8s_client.py
+
+  Collected signals include:
+
+  - Pod name
+  - Namespace
+  - Status
+  - CPU usage
+  - Memory usage
+  - Disk read/write
+  - Network RX/TX
+  - PVC mounts
+  - PVC latency
+  - PVC IOPS
+  - Restart count
+  - Risk score
+  - Risk reasons
+
+  If Kubernetes is not available, the system can run in simulation mode.
+
+  ———
+
+  ### 3. Multi-Agent AI Engine
+
+  The analysis engine uses multiple specialized agents.
+
+  Main file:
+
+  backend/agents.py
+
+  Agents include:
+
+  - CPU Agent
+  - Memory Agent
+  - Storage/PVC Agent
+  - Log/IO Agent
+  - Dependency Agent
+  - Root Cause Agent
+  - Orchestrator Agent
+
+  Each agent focuses on one part of the operational picture. The orchestrator combines all findings into recommendations.
+
+  ———
+
+  ## Dashboard Views
+
+  ### 1. Telemetry Dashboard
+
+  The telemetry dashboard shows live resource metrics.
+
+  It includes:
+
+  - Total CPU usage
+  - Total memory usage
+  - Disk I/O
+  - Network traffic
+  - Top risk pod
+  - CPU distribution chart
+  - Memory chart
+  - Disk and PVC activity chart
+  - Network flow chart
+  - Pod-level table
+
+  The pod table shows:
+
+  - Pod identity
+  - Namespace
+  - Status
+  - CPU
+  - Memory
+  - I/O
+  - Risk score
+  - Risk level
+  - Risk reasons
+
+  ———
+
+  ### 2. Dependency Graph
+
+  The dependency graph visualizes service relationships.
+
+  It shows:
+
+  - Pods as nodes
+  - PVCs as storage nodes
+  - Pod-to-pod dependencies
+  - Pod-to-PVC dependencies
+  - Root-cause pod highlighting
+  - Risk-based node colors
+
+  Example inferred relationships:
+
+  frontend-svc -> backend-api
+  backend-api -> postgres-db
+  backend-api -> redis-cache
+  worker-node -> postgres-db
+  postgres-db -> db-storage-pvc
+
+  ———
+
+  ### 3. AI Analytics
+
+  The AI Analytics screen shows the intelligence layer.
+
+  It includes:
+
+  - Root cause analysis
+  - RCA confidence score
+  - Evidence behind the root cause
+  - Impacted pods
+  - Contributing metrics
+  - AI agent findings
+  - Strategic recommendations
+  - Incident timeline
+  - Anomaly timeline
+
+  ———
+
+  ## Implemented Intelligence Features
+
+  ### Pod Risk Score
+
+  Each pod receives a risk score from 0 to 100.
+
+  The score is calculated using:
+
+  - CPU pressure
+  - Memory pressure
+  - Disk I/O
+  - Network I/O
+  - Restart count
+  - PVC latency
+  - Pod status
+
+  Risk levels:
+
+  0-44   Healthy
+  45-74  Warning
+  75-100 Critical
+
+  ———
+
+  ### Root Cause Analysis
+
+  The root cause engine identifies the most likely faulty pod.
+
+  It uses:
+
+  - Pod risk score
+  - CPU and memory spikes
+  - Disk and network pressure
+  - PVC latency
+  - Restart count
+  - Related events
+  - Dependency impact
+
+  Example output:
+
+  Root Cause: postgres-db
+  Confidence: 100%
+  Reason: High PVC latency, disk write pressure, memory pressure, CPU spike, and pod restarts.
+  Impacted Pods: backend-api, worker-node, frontend-svc
+
+  ———
+
+  ### Incident Timeline
+
+  The incident timeline explains the incident flow from detection to response.
+
+  Timeline phases include:
+
+  - Discovery
+  - Detection
+  - Correlation
+  - Storage check
+  - Impact analysis
+  - Evidence attachment
+  - Recommended response
+
+  Example:
+
+  T+00s Telemetry snapshot collected
+  T+05s Risk model ranked pod candidates
+  T+10s postgres-db selected as root cause
+  T+15s PVC dependency checked
+  T+20s Blast radius estimated
+  T+25s Anomaly evidence attached
+  T+50s Recommended response generated
+
+  ———
+
+  ## Simulation Scenarios
+
+  The project supports simulation mode for reliable hackathon demos.
+
+  Available scenarios:
+
+  ### 1. Baseline State
+
+  Normal cluster behavior.
+
+  ### 2. Database Stress
+
+  Simulates:
+
+  - High PostgreSQL CPU
+  - High PostgreSQL memory
+  - High disk writes
+  - PVC latency
+  - Database restarts
+  - Worker I/O correlation
+
+  ### 3. Memory Leak
+
+  Simulates:
+
+  - Backend API memory growth
+  - Increased network traffic
+  - Memory leak risk
+
+  ———
+
+  ## Running The Project
+
+  ### Backend
+
+  Go to the backend directory:
+
+  cd backend
+
+  Start the backend in simulation mode:
+
+  SIMULATE_METRICS=true ENABLE_LLM=false ./venv/bin/python -m uvicorn main:app --host 127.0.0.1 --port 8001
+
+  Backend runs at:
+
+  http://127.0.0.1:8001
+
+  Health check:
+
+  http://127.0.0.1:8001/api/v1/health
+
+  ———
+
+  ### Frontend
+
+  Go to the frontend directory:
+
+  cd frontend
+
+  Install dependencies if needed:
+
+  npm install
+
+  Start the frontend:
+
+  npm run dev -- --host 127.0.0.1
+
+  Frontend runs at:
+
+  http://127.0.0.1:5173
+
+  ———
+
+  ## API Examples
+
+  ### Health Check
+
+  curl http://127.0.0.1:8001/api/v1/health
+
+  ### Get Metrics
+
+  curl http://127.0.0.1:8001/api/v1/metrics
+
+  ### Change Scenario
+
+  curl -X POST http://127.0.0.1:8001/api/v1/scenario \
+    -H "Content-Type: application/json" \
+    -d '{"scenario":"db_stress"}'
+
+  ### Run AI Analysis
+
+  curl -X POST http://127.0.0.1:8001/api/v1/analyze \
+    -H "Content-Type: application/json" \
+    -d '{"namespace":"all"}'
+
+  ———
+
+  ## Demo Flow
+
+  For a hackathon presentation:
+
+  1. Open the dashboard.
+  2. Show the baseline telemetry.
+  3. Switch to Database Stress.
+  4. Show CPU, memory, disk, PVC, and risk score changes.
+  5. Click Analyze Cluster.
+  6. Show the root cause card.
+  7. Show the incident timeline.
+  8. Open the dependency graph.
+  9. Show the highlighted root-cause pod.
+  10. Explain the recommendations.
+
+  Suggested demo message:
+
+  PodMind AI does not only monitor Kubernetes metrics. It explains what is happening, identifies the likely root cause, maps affected services, and recommends what operators should do next.
+
+  ———
+
+  ## Why This Project Matters
+
+  Traditional monitoring tools show raw metrics. PodMind AI converts raw telemetry into operational intelligence.
+
+  It helps operators:
+
+  - Detect anomalies faster
+  - Understand service dependencies
+  - Identify root causes
+  - Reduce debugging time
+  - Prevent downtime
+  - Make better optimization decisions
+
+  ———
+
+  ## Future Enhancements
+
+  - Prometheus integration
+  - WebSocket-based real-time streaming
+  - AI ChatOps assistant
+  - Exportable incident report
+  - Kubernetes YAML remediation suggestions
+  - Namespace and workload explorer
+  - Historical trend storage
+  - Alert delivery through Slack, email, or Teams
+  - Real eBPF-based network dependency tracing
+  - Production deployment on K3s or MicroK8s
+
+  ———
+
+  ## Hackathon Positioning
+
+  PodMind AI fits the theme:
+
+  Beyond monitoring: AI agents for real-time pod resource discovery and dependency mapping
+
+  The project demonstrates:
+
+  - Real-time pod discovery
+  - Multi-agent AI analysis
+  - Dependency mapping
+  - Root-cause detection
+  - PVC and I/O correlation
+  - Incident timeline generation
+  - Operator-focused recommendations
+  - A working dashboard prototype
+
+  ———
+
+  ## Team
+
+  Team Seekers
+
+  ———
+
+  ## License
+
+  This project is built for hackathon and educational use.
