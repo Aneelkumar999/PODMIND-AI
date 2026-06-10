@@ -110,9 +110,11 @@ const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
             className="bg-black/20 border border-white/10 rounded-xl py-2 px-4 text-sm focus:outline-none focus:border-indigo-500/50 transition-colors"
           >
             <option value="all">All Namespaces</option>
-            {namespaces.map(ns => (
-              <option key={ns} value={ns}>{ns}</option>
-            ))}
+            {(namespaces as string[]).map((ns) => (
+  <option key={ns} value={ns}>
+    {ns}
+  </option>
+))}
           </select>
         </div>
 
