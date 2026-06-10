@@ -6,3 +6,5 @@ langgraph
 google-generativeai
 pydantic
 openai
+passlib[bcrypt]
+python-jose[cryptography]
