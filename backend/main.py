@@ -71,9 +71,10 @@ Provide a concise, expert response. If referring to pods, use the names provided
 
     prompt = f"{system_prompt}\n\n{cluster_context}\n\nUser Question: {req.message}"
 
-    try:
-        # Prefer OpenAI if key is provided
-        if openai_client:
+    errors = []
+    # Try OpenAI first
+    if openai_client:
+        try:
             response = openai_client.chat.completions.create(
                 model="gpt-4o",
                 messages=[
@@ -83,17 +84,23 @@ Provide a concise, expert response. If referring to pods, use the names provided
                 timeout=15
             )
             return {"response": response.choices[0].message.content}
+        except Exception as e:
+            errors.append(f"OpenAI: {str(e)}")
 
-        # Fallback to Gemini
-        elif gemini_model:
+    # Fallback to Gemini
+    if gemini_model:
+        try:
             response = gemini_model.generate_content(
                 prompt,
                 request_options={"timeout": float(os.getenv("LLM_TIMEOUT_SECONDS", "10"))}
             )
             return {"response": response.text}
+        except Exception as e:
+            errors.append(f"Gemini: {str(e)}")
 
-    except Exception as e:
-        return {"response": f"I encountered an error while thinking: {str(e)}"}
+    if errors:
+        return {"response": f"AI unavailable. Errors: {'; '.join(errors)}"}
+    return {"response": "AI Chat is currently offline (No API Keys configured)."}
 
 
 @app.get("/api/v1/metrics")
