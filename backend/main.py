@@ -35,7 +35,8 @@ current_scenario = "healthy"
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://podmind-ai.vercel.app",
+        "https://podmind-ai.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
