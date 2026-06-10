@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Activity, Share2, Lightbulb, Cpu, Database, AlertCircle, CheckCircle, Zap, FileText, Download, LogOut } from 'lucide-react';
+import { Activity, Share2, Lightbulb, Cpu, Database, AlertCircle, CheckCircle, Zap, FileText, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import MetricsDashboard from './components/MetricsDashboard';

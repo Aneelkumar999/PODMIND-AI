@@ -5,3 +5,4 @@ kubernetes
 langgraph
 google-generativeai
 pydantic
+passlib

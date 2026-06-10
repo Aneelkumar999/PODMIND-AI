@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, AreaChart, Area, LineChart, Line
@@ -22,7 +22,7 @@ const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
   namespaceFilter, setNamespaceFilter, 
   riskFilter, setRiskFilter 
 }) => {
-  const namespaces = useMemo(() => {
+  const namespaces = useMemo<string[]>(() => {
     // We want to show all possible namespaces even if one is selected
     // So we use a hardcoded list for simulation or extract from full metrics if possible
     // But since fetchMetrics now filters on the backend, we might need a separate call for namespaces
@@ -31,7 +31,7 @@ const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
     
     if (!metrics || !metrics.pods) return [];
     const set = new Set(metrics.pods.map((p: any) => p.namespace || 'default'));
-    return Array.from(set);
+    return Array.from(set) as string[];
   }, [metrics]);
 
   const filteredPods = useMemo(() => {
