@@ -8,7 +8,7 @@ import AIInsights from './components/AIInsights';
 import Auth from './components/Auth';
 import AIChatbot from './components/AIChatbot';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8001/api/v1';
+const API_BASE = import.meta.env.VITE_API_BASE || "https://podmind-ai.onrender.com/api/v1";
 
 function App() {
   const [user, setUser] = useState<any>(() => {
