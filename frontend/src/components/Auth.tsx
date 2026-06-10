@@ -23,7 +23,7 @@ const Auth: React.FC<AuthProps> = ({ onAuthSuccess, API_BASE }) => {
 
     try {
       if (mode === 'signup') {
-        await axios.post(`${API_BASE}/auth/signup`, {
+        await axios.post(`${API_BASE}/api/v1/auth/signup`, {
           username,
           password,
           full_name: fullName
@@ -31,7 +31,7 @@ const Auth: React.FC<AuthProps> = ({ onAuthSuccess, API_BASE }) => {
         setAuthMode('signin');
         setError('Account created! Please sign in.');
       } else {
-        const res = await axios.post(`${API_BASE}/auth/signin`, {
+        const res = await axios.post(`${API_BASE}/api/v1/auth/signin`, {
           username,
           password
         });
